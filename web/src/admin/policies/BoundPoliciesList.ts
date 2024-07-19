@@ -4,6 +4,7 @@ import "@goauthentik/admin/policies/PolicyWizard";
 import "@goauthentik/admin/users/UserForm";
 import { DEFAULT_CONFIG } from "@goauthentik/common/api/config";
 import { PFSize } from "@goauthentik/common/enums.js";
+import { uiConfig } from "@goauthentik/common/ui/config";
 import "@goauthentik/components/ak-status-label";
 import "@goauthentik/elements/Tabs";
 import "@goauthentik/elements/forms/DeleteBulkForm";
@@ -32,10 +33,12 @@ export class BoundPoliciesList extends Table<PolicyBinding> {
 
     order = "order";
 
-    async apiEndpoint(): Promise<PaginatedResponse<PolicyBinding>> {
+    async apiEndpoint(page: number): Promise<PaginatedResponse<PolicyBinding>> {
         return new PoliciesApi(DEFAULT_CONFIG).policiesBindingsList({
-            ...(await this.defaultEndpointConfig()),
             target: this.target || "",
+            ordering: this.order,
+            page: page,
+            pageSize: (await uiConfig()).pagination.perPage,
         });
     }
 
@@ -209,11 +212,5 @@ export class BoundPoliciesList extends Table<PolicyBinding> {
                     ${msg("Bind existing policy")}
                 </button>
             </ak-forms-modal> `;
-    }
-}
-
-declare global {
-    interface HTMLElementTagNameMap {
-        "ak-bound-policies-list": BoundPoliciesList;
     }
 }

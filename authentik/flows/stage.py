@@ -18,6 +18,7 @@ from authentik.flows.challenge import (
     AccessDeniedChallenge,
     Challenge,
     ChallengeResponse,
+    ChallengeTypes,
     ContextualFlowInfo,
     HttpChallengeResponse,
     RedirectChallenge,
@@ -243,6 +244,7 @@ class AccessDeniedChallengeView(ChallengeStageView):
         return AccessDeniedChallenge(
             data={
                 "error_message": str(self.error_message or "Unknown error"),
+                "type": ChallengeTypes.NATIVE.value,
                 "component": "ak-stage-access-denied",
             }
         )
@@ -262,6 +264,7 @@ class RedirectStage(ChallengeStageView):
         )
         return RedirectChallenge(
             data={
+                "type": ChallengeTypes.REDIRECT.value,
                 "to": destination,
             }
         )

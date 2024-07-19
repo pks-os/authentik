@@ -30,6 +30,7 @@ from authentik.flows.apps import HIST_FLOW_EXECUTION_STAGE_TIME
 from authentik.flows.challenge import (
     Challenge,
     ChallengeResponse,
+    ChallengeTypes,
     FlowErrorChallenge,
     HttpChallengeResponse,
     RedirectChallenge,
@@ -551,6 +552,7 @@ def to_stage_response(request: HttpRequest, source: HttpResponse) -> HttpRespons
         return HttpChallengeResponse(
             RedirectChallenge(
                 {
+                    "type": ChallengeTypes.REDIRECT,
                     "to": str(redirect_url),
                 }
             )
@@ -559,6 +561,7 @@ def to_stage_response(request: HttpRequest, source: HttpResponse) -> HttpRespons
         return HttpChallengeResponse(
             ShellChallenge(
                 {
+                    "type": ChallengeTypes.SHELL,
                     "body": source.render().content.decode("utf-8"),
                 }
             )
@@ -568,6 +571,7 @@ def to_stage_response(request: HttpRequest, source: HttpResponse) -> HttpRespons
         return HttpChallengeResponse(
             ShellChallenge(
                 {
+                    "type": ChallengeTypes.SHELL,
                     "body": source.content.decode("utf-8"),
                 }
             )

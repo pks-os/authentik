@@ -61,7 +61,6 @@ class OutpostConfig:
 
     log_level: str = CONFIG.get("log_level")
     object_naming_template: str = field(default="ak-outpost-%(name)s")
-    refresh_interval: str = "minutes=5"
 
     container_image: str | None = field(default=None)
 

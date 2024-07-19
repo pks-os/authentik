@@ -183,7 +183,7 @@ func (ac *APIController) startWSHealth() {
 
 func (ac *APIController) startIntervalUpdater() {
 	logger := ac.logger.WithField("loop", "interval-updater")
-	ticker := time.NewTicker(time.Duration(ac.Outpost.RefreshIntervalS) * time.Second)
+	ticker := time.NewTicker(5 * time.Minute)
 	for ; true; <-ticker.C {
 		logger.Debug("Running interval update")
 		err := ac.OnRefresh()
@@ -198,7 +198,6 @@ func (ac *APIController) startIntervalUpdater() {
 				"build":        constants.BUILD("tagged"),
 			}).SetToCurrentTime()
 		}
-		ticker.Reset(time.Duration(ac.Outpost.RefreshIntervalS) * time.Second)
 	}
 }
 

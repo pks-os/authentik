@@ -174,9 +174,3 @@ export class PropertyMappingLDAPForm extends ModelForm<RACPropertyMapping, strin
         `;
     }
 }
-
-declare global {
-    interface HTMLElementTagNameMap {
-        "ak-property-mapping-rac-form": PropertyMappingLDAPForm;
-    }
-}

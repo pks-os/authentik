@@ -111,9 +111,3 @@ export class APIBrowser extends Interface {
         `;
     }
 }
-
-declare global {
-    interface HTMLElementTagNameMap {
-        "ak-api-browser": APIBrowser;
-    }
-}

@@ -75,9 +75,3 @@ export class PropertyMappingWizard extends AKElement {
         `;
     }
 }
-
-declare global {
-    interface HTMLElementTagNameMap {
-        "ak-property-mapping-wizard": PropertyMappingWizard;
-    }
-}

@@ -33,6 +33,7 @@ import PFBase from "@patternfly/patternfly/patternfly-base.css";
 
 import {
     CapabilitiesEnum,
+    ChallengeChoices,
     ChallengeTypes,
     ContextualFlowInfo,
     FetchError,
@@ -253,6 +254,7 @@ export class FlowExecutor extends Interface implements StageHost {
             body = error.message;
         }
         const challenge: FlowErrorChallenge = {
+            type: ChallengeChoices.Native,
             component: "ak-stage-flow-error",
             error: body,
             requestId: "",
@@ -278,11 +280,7 @@ export class FlowExecutor extends Interface implements StageHost {
         }
     }
 
-    async renderChallenge(): Promise<TemplateResult> {
-        if (!this.challenge) {
-            return html`<ak-empty-state ?loading=${true} header=${msg("Loading")}>
-            </ak-empty-state>`;
-        }
+    async renderChallengeNativeElement(): Promise<TemplateResult> {
         switch (this.challenge?.component) {
             case "ak-stage-access-denied":
                 await import("@goauthentik/flow/stages/access_denied/AccessDeniedStage");
@@ -413,17 +411,31 @@ export class FlowExecutor extends Interface implements StageHost {
                     .host=${this as StageHost}
                     .challenge=${this.challenge}
                 ></ak-stage-flow-error>`;
-            case "xak-flow-redirect":
+            default:
+                return html`Invalid native challenge element`;
+        }
+    }
+
+    async renderChallenge(): Promise<TemplateResult> {
+        if (!this.challenge) {
+            return html`<ak-empty-state ?loading=${true} header=${msg("Loading")}>
+            </ak-empty-state>`;
+        }
+        switch (this.challenge.type) {
+            case ChallengeChoices.Redirect:
                 return html`<ak-stage-redirect
                     .host=${this as StageHost}
                     .challenge=${this.challenge}
                     ?promptUser=${this.inspectorOpen}
                 >
                 </ak-stage-redirect>`;
-            case "xak-flow-shell":
+            case ChallengeChoices.Shell:
                 return html`${unsafeHTML((this.challenge as ShellChallenge).body)}`;
+            case ChallengeChoices.Native:
+                return await this.renderChallengeNativeElement();
             default:
-                return html`Invalid native challenge element`;
+                console.debug(`authentik/flows: unexpected data type ${this.challenge.type}`);
+                return html``;
         }
     }
 
@@ -514,11 +526,5 @@ export class FlowExecutor extends Interface implements StageHost {
                 </div>
             </div>
         </ak-locale-context>`;
-    }
-}
-
-declare global {
-    interface HTMLElementTagNameMap {
-        "ak-flow-executor": FlowExecutor;
     }
 }
