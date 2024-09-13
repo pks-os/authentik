@@ -2848,13 +2848,13 @@ dev = ["bumpver", "isort", "mypy", "pylint", "pytest", "yapf"]
 
 [[package]]
 name = "msgraph-sdk"
-version = "1.6.0"
+version = "1.7.0"
 description = "The Microsoft Graph Python SDK"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "msgraph_sdk-1.6.0-py3-none-any.whl", hash = "sha256:00dc0037a0a15a00bf04a9fd1340bb14b70dd0bbd5bc881bfde4ec9c0e2b9dbc"},
-    {file = "msgraph_sdk-1.6.0.tar.gz", hash = "sha256:6724b186564b5a208e5069adff4a491a5401f36ed6928edcc4b6702b82b44c94"},
+    {file = "msgraph_sdk-1.7.0-py3-none-any.whl", hash = "sha256:66683b361eb1230b315e57c75a144e2f93c8a7e70f11c6a8c6c150dd59fa0235"},
+    {file = "msgraph_sdk-1.7.0.tar.gz", hash = "sha256:40b7776e2f02825ddb51d390490858e7d1c065a36e2a21b7655b392c78565b43"},
 ]
 
 [package.dependencies]
@@ -3204,13 +3204,13 @@ files = [
 
 [[package]]
 name = "pdoc"
-version = "14.6.1"
+version = "14.7.0"
 description = "API Documentation for Python Projects"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "pdoc-14.6.1-py3-none-any.whl", hash = "sha256:efbed433655264392c60551615a3d42b8f21e492373419756d20234c667b54bc"},
-    {file = "pdoc-14.6.1.tar.gz", hash = "sha256:ee598f30d5c55dd4702086dabc412a26022acc35aa88aa382cda8ac655fead98"},
+    {file = "pdoc-14.7.0-py3-none-any.whl", hash = "sha256:72377a907efc6b2c5b3c56b717ef34f11d93621dced3b663f3aede0b844c0ad2"},
+    {file = "pdoc-14.7.0.tar.gz", hash = "sha256:2d28af9c0acc39180744ad0543e4bbc3223ecba0d1302db315ec521c51f71f93"},
 ]
 
 [package.dependencies]
