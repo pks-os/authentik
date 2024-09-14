@@ -57,7 +57,7 @@
         "@jeysal/storybook-addon-css-user-preferences": "^0.2.0",
         "@lit/localize-tools": "^0.8.0",
         "@rollup/plugin-replace": "^5.0.7",
-        "@spotlightjs/spotlight": "^2.4.0",
+        "@spotlightjs/spotlight": "^2.4.1",
         "@storybook/addon-essentials": "^8.3.0",
         "@storybook/addon-links": "^8.3.0",
         "@storybook/api": "^7.6.17",
@@ -81,7 +81,7 @@
         "@wdio/spec-reporter": "^8.36.1",
         "babel-plugin-macros": "^3.1.0",
         "babel-plugin-tsconfig-paths": "^1.0.3",
-        "chokidar": "^3.6.0",
+        "chokidar": "^4.0.0",
         "cross-env": "^7.0.3",
         "esbuild": "^0.23.1",
         "eslint": "^9.8.0",
@@ -122,9 +122,9 @@
         "@esbuild/darwin-arm64": "^0.23.0",
         "@esbuild/linux-amd64": "^0.18.11",
         "@esbuild/linux-arm64": "^0.23.0",
-        "@rollup/rollup-darwin-arm64": "4.21.2",
-        "@rollup/rollup-linux-arm64-gnu": "4.21.2",
-        "@rollup/rollup-linux-x64-gnu": "4.21.2"
+        "@rollup/rollup-darwin-arm64": "4.21.3",
+        "@rollup/rollup-linux-arm64-gnu": "4.21.3",
+        "@rollup/rollup-linux-x64-gnu": "4.21.3"
     },
     "private": true,
     "scripts": {
