@@ -658,6 +658,9 @@ export default {
                             type: "category",
                             label: "2024",
                             items: [
+                                "security/cves/CVE-2024-52307",
+                                "security/cves/CVE-2024-52289",
+                                "security/cves/CVE-2024-52287",
                                 "security/cves/CVE-2024-47077",
                                 "security/cves/CVE-2024-47070",
                                 "security/cves/CVE-2024-38371",
