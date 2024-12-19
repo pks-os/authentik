@@ -3097,6 +3097,285 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericError'
           description: ''
+  /core/application_entitlements/:
+    get:
+      operationId: core_application_entitlements_list
+      description: ApplicationEntitlement Viewset
+      parameters:
+      - in: query
+        name: app
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: name
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: pbm_uuid
+        schema:
+          type: string
+          format: uuid
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - core
+      security:
+      - authentik: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedApplicationEntitlementList'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: ''
+    post:
+      operationId: core_application_entitlements_create
+      description: ApplicationEntitlement Viewset
+      tags:
+      - core
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationEntitlementRequest'
+        required: true
+      security:
+      - authentik: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationEntitlement'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: ''
+  /core/application_entitlements/{pbm_uuid}/:
+    get:
+      operationId: core_application_entitlements_retrieve
+      description: ApplicationEntitlement Viewset
+      parameters:
+      - in: path
+        name: pbm_uuid
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Application Entitlement.
+        required: true
+      tags:
+      - core
+      security:
+      - authentik: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationEntitlement'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: ''
+    put:
+      operationId: core_application_entitlements_update
+      description: ApplicationEntitlement Viewset
+      parameters:
+      - in: path
+        name: pbm_uuid
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Application Entitlement.
+        required: true
+      tags:
+      - core
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationEntitlementRequest'
+        required: true
+      security:
+      - authentik: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationEntitlement'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: ''
+    patch:
+      operationId: core_application_entitlements_partial_update
+      description: ApplicationEntitlement Viewset
+      parameters:
+      - in: path
+        name: pbm_uuid
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Application Entitlement.
+        required: true
+      tags:
+      - core
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedApplicationEntitlementRequest'
+      security:
+      - authentik: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationEntitlement'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: ''
+    delete:
+      operationId: core_application_entitlements_destroy
+      description: ApplicationEntitlement Viewset
+      parameters:
+      - in: path
+        name: pbm_uuid
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Application Entitlement.
+        required: true
+      tags:
+      - core
+      security:
+      - authentik: []
+      responses:
+        '204':
+          description: No response body
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: ''
+  /core/application_entitlements/{pbm_uuid}/used_by/:
+    get:
+      operationId: core_application_entitlements_used_by_list
+      description: Get a list of all objects that use this object
+      parameters:
+      - in: path
+        name: pbm_uuid
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this Application Entitlement.
+        required: true
+      tags:
+      - core
+      security:
+      - authentik: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UsedBy'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+          description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericError'
+          description: ''
   /core/applications/:
     get:
       operationId: core_applications_list
@@ -23305,6 +23584,7 @@ paths:
           - authentik_blueprints.blueprintinstance
           - authentik_brands.brand
           - authentik_core.application
+          - authentik_core.applicationentitlement
           - authentik_core.group
           - authentik_core.token
           - authentik_core.user
@@ -23545,6 +23825,7 @@ paths:
           - authentik_blueprints.blueprintinstance
           - authentik_brands.brand
           - authentik_core.application
+          - authentik_core.applicationentitlement
           - authentik_core.group
           - authentik_core.token
           - authentik_core.user
@@ -25008,6 +25289,12 @@ paths:
         required: true
       tags:
       - sources
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupKerberosSourceConnectionRequest'
+        required: true
       security:
       - authentik: []
       responses:
@@ -25042,6 +25329,11 @@ paths:
         required: true
       tags:
       - sources
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedGroupKerberosSourceConnectionRequest'
       security:
       - authentik: []
       responses:
@@ -25196,6 +25488,12 @@ paths:
       description: Group-source connection Viewset
       tags:
       - sources
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupOAuthSourceConnectionRequest'
+        required: true
       security:
       - authentik: []
       responses:
@@ -25263,6 +25561,12 @@ paths:
         required: true
       tags:
       - sources
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupOAuthSourceConnectionRequest'
+        required: true
       security:
       - authentik: []
       responses:
@@ -25296,6 +25600,11 @@ paths:
         required: true
       tags:
       - sources
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedGroupOAuthSourceConnectionRequest'
       security:
       - authentik: []
       responses:
@@ -25448,6 +25757,12 @@ paths:
       description: Group-source connection Viewset
       tags:
       - sources
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupPlexSourceConnectionRequest'
+        required: true
       security:
       - authentik: []
       responses:
@@ -25515,6 +25830,12 @@ paths:
         required: true
       tags:
       - sources
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupPlexSourceConnectionRequest'
+        required: true
       security:
       - authentik: []
       responses:
@@ -25548,6 +25869,11 @@ paths:
         required: true
       tags:
       - sources
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedGroupPlexSourceConnectionRequest'
       security:
       - authentik: []
       responses:
@@ -25741,6 +26067,12 @@ paths:
         required: true
       tags:
       - sources
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupSAMLSourceConnectionRequest'
+        required: true
       security:
       - authentik: []
       responses:
@@ -25774,6 +26106,11 @@ paths:
         required: true
       tags:
       - sources
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedGroupSAMLSourceConnectionRequest'
       security:
       - authentik: []
       responses:
@@ -28734,6 +29071,12 @@ paths:
         required: true
       tags:
       - sources
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSourceConnectionRequest'
+        required: true
       security:
       - authentik: []
       responses:
@@ -28767,6 +29110,11 @@ paths:
         required: true
       tags:
       - sources
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUserSourceConnectionRequest'
       security:
       - authentik: []
       responses:
@@ -38070,6 +38418,38 @@ components:
       - pk
       - provider_obj
       - slug
+    ApplicationEntitlement:
+      type: object
+      description: ApplicationEntitlement Serializer
+      properties:
+        pbm_uuid:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+        app:
+          type: string
+          format: uuid
+        attributes: {}
+      required:
+      - app
+      - name
+      - pbm_uuid
+    ApplicationEntitlementRequest:
+      type: object
+      description: ApplicationEntitlement Serializer
+      properties:
+        name:
+          type: string
+          minLength: 1
+        app:
+          type: string
+          format: uuid
+        attributes: {}
+      required:
+      - app
+      - name
     ApplicationRequest:
       type: object
       description: Application Serializer
@@ -42555,14 +42935,15 @@ components:
         group:
           type: string
           format: uuid
-          readOnly: true
         source:
+          type: string
+          format: uuid
+        source_obj:
           allOf:
           - $ref: '#/components/schemas/Source'
           readOnly: true
         identifier:
           type: string
-          readOnly: true
         created:
           type: string
           format: date-time
@@ -42572,6 +42953,24 @@ components:
       - group
       - identifier
       - pk
+      - source
+      - source_obj
+    GroupKerberosSourceConnectionRequest:
+      type: object
+      description: OAuth Group-Source connection Serializer
+      properties:
+        group:
+          type: string
+          format: uuid
+        source:
+          type: string
+          format: uuid
+        identifier:
+          type: string
+          minLength: 1
+      required:
+      - group
+      - identifier
       - source
     GroupMatchingModeEnum:
       enum:
@@ -42667,14 +43066,15 @@ components:
         group:
           type: string
           format: uuid
-          readOnly: true
         source:
+          type: string
+          format: uuid
+        source_obj:
           allOf:
           - $ref: '#/components/schemas/Source'
           readOnly: true
         identifier:
           type: string
-          readOnly: true
         created:
           type: string
           format: date-time
@@ -42684,6 +43084,24 @@ components:
       - group
       - identifier
       - pk
+      - source
+      - source_obj
+    GroupOAuthSourceConnectionRequest:
+      type: object
+      description: OAuth Group-Source connection Serializer
+      properties:
+        group:
+          type: string
+          format: uuid
+        source:
+          type: string
+          format: uuid
+        identifier:
+          type: string
+          minLength: 1
+      required:
+      - group
+      - identifier
       - source
     GroupPlexSourceConnection:
       type: object
@@ -42696,14 +43114,15 @@ components:
         group:
           type: string
           format: uuid
-          readOnly: true
         source:
+          type: string
+          format: uuid
+        source_obj:
           allOf:
           - $ref: '#/components/schemas/Source'
           readOnly: true
         identifier:
           type: string
-          readOnly: true
         created:
           type: string
           format: date-time
@@ -42713,6 +43132,24 @@ components:
       - group
       - identifier
       - pk
+      - source
+      - source_obj
+    GroupPlexSourceConnectionRequest:
+      type: object
+      description: Plex Group-Source connection Serializer
+      properties:
+        group:
+          type: string
+          format: uuid
+        source:
+          type: string
+          format: uuid
+        identifier:
+          type: string
+          minLength: 1
+      required:
+      - group
+      - identifier
       - source
     GroupRequest:
       type: object
@@ -42753,14 +43190,15 @@ components:
         group:
           type: string
           format: uuid
-          readOnly: true
         source:
+          type: string
+          format: uuid
+        source_obj:
           allOf:
           - $ref: '#/components/schemas/Source'
           readOnly: true
         identifier:
           type: string
-          readOnly: true
         created:
           type: string
           format: date-time
@@ -42770,6 +43208,24 @@ components:
       - group
       - identifier
       - pk
+      - source
+      - source_obj
+    GroupSAMLSourceConnectionRequest:
+      type: object
+      description: OAuth Group-Source connection Serializer
+      properties:
+        group:
+          type: string
+          format: uuid
+        source:
+          type: string
+          format: uuid
+        identifier:
+          type: string
+          minLength: 1
+      required:
+      - group
+      - identifier
       - source
     IdentificationChallenge:
       type: object
@@ -42801,7 +43257,9 @@ components:
         flow_designation:
           $ref: '#/components/schemas/FlowDesignationEnum'
         captcha_stage:
-          $ref: '#/components/schemas/CaptchaChallenge'
+          allOf:
+          - $ref: '#/components/schemas/CaptchaChallenge'
+          nullable: true
         enroll_url:
           type: string
         recovery_url:
@@ -44732,6 +45190,7 @@ components:
       - authentik_core.group
       - authentik_core.user
       - authentik_core.application
+      - authentik_core.applicationentitlement
       - authentik_core.token
       - authentik_enterprise.license
       - authentik_providers_google_workspace.googleworkspaceprovider
@@ -45812,6 +46271,18 @@ components:
       - radius
       - rac
       type: string
+    PaginatedApplicationEntitlementList:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationEntitlement'
+      required:
+      - pagination
+      - results
     PaginatedApplicationList:
       type: object
       properties:
@@ -47714,6 +48185,17 @@ components:
       required:
       - backends
       - name
+    PatchedApplicationEntitlementRequest:
+      type: object
+      description: ApplicationEntitlement Serializer
+      properties:
+        name:
+          type: string
+          minLength: 1
+        app:
+          type: string
+          format: uuid
+        attributes: {}
     PatchedApplicationRequest:
       type: object
       description: Application Serializer
@@ -48562,6 +49044,45 @@ components:
         default_group_email_domain:
           type: string
           minLength: 1
+    PatchedGroupKerberosSourceConnectionRequest:
+      type: object
+      description: OAuth Group-Source connection Serializer
+      properties:
+        group:
+          type: string
+          format: uuid
+        source:
+          type: string
+          format: uuid
+        identifier:
+          type: string
+          minLength: 1
+    PatchedGroupOAuthSourceConnectionRequest:
+      type: object
+      description: OAuth Group-Source connection Serializer
+      properties:
+        group:
+          type: string
+          format: uuid
+        source:
+          type: string
+          format: uuid
+        identifier:
+          type: string
+          minLength: 1
+    PatchedGroupPlexSourceConnectionRequest:
+      type: object
+      description: Plex Group-Source connection Serializer
+      properties:
+        group:
+          type: string
+          format: uuid
+        source:
+          type: string
+          format: uuid
+        identifier:
+          type: string
+          minLength: 1
     PatchedGroupRequest:
       type: object
       description: Group Serializer
@@ -48588,6 +49109,19 @@ components:
           items:
             type: string
             format: uuid
+    PatchedGroupSAMLSourceConnectionRequest:
+      type: object
+      description: OAuth Group-Source connection Serializer
+      properties:
+        group:
+          type: string
+          format: uuid
+        source:
+          type: string
+          format: uuid
+        identifier:
+          type: string
+          minLength: 1
     PatchedIdentificationStageRequest:
       type: object
       description: IdentificationStage Serializer
@@ -50510,6 +51044,9 @@ components:
       properties:
         user:
           type: integer
+        source:
+          type: string
+          format: uuid
         identifier:
           type: string
           minLength: 1
@@ -50562,6 +51099,11 @@ components:
       type: object
       description: OAuth Source Serializer
       properties:
+        user:
+          type: integer
+        source:
+          type: string
+          format: uuid
         identifier:
           type: string
           minLength: 1
@@ -50574,6 +51116,11 @@ components:
       type: object
       description: Plex Source connection Serializer
       properties:
+        user:
+          type: integer
+        source:
+          type: string
+          format: uuid
         identifier:
           type: string
           minLength: 1
@@ -50623,9 +51170,23 @@ components:
       type: object
       description: SAML Source Serializer
       properties:
+        user:
+          type: integer
+        source:
+          type: string
+          format: uuid
         identifier:
           type: string
           minLength: 1
+    PatchedUserSourceConnectionRequest:
+      type: object
+      description: User source connection
+      properties:
+        user:
+          type: integer
+        source:
+          type: string
+          format: uuid
     PatchedUserWriteStageRequest:
       type: object
       description: UserWriteStage Serializer
@@ -55550,6 +56111,9 @@ components:
         user:
           type: integer
         source:
+          type: string
+          format: uuid
+        source_obj:
           allOf:
           - $ref: '#/components/schemas/Source'
           readOnly: true
@@ -55564,6 +56128,7 @@ components:
       - identifier
       - pk
       - source
+      - source_obj
       - user
     UserKerberosSourceConnectionRequest:
       type: object
@@ -55571,11 +56136,15 @@ components:
       properties:
         user:
           type: integer
+        source:
+          type: string
+          format: uuid
         identifier:
           type: string
           minLength: 1
       required:
       - identifier
+      - source
       - user
     UserLoginChallenge:
       type: object
@@ -55798,8 +56367,10 @@ components:
           title: ID
         user:
           type: integer
-          readOnly: true
         source:
+          type: string
+          format: uuid
+        source_obj:
           allOf:
           - $ref: '#/components/schemas/Source'
           readOnly: true
@@ -55815,11 +56386,17 @@ components:
       - identifier
       - pk
       - source
+      - source_obj
       - user
     UserOAuthSourceConnectionRequest:
       type: object
       description: OAuth Source Serializer
       properties:
+        user:
+          type: integer
+        source:
+          type: string
+          format: uuid
         identifier:
           type: string
           minLength: 1
@@ -55830,6 +56407,8 @@ components:
           nullable: true
       required:
       - identifier
+      - source
+      - user
     UserObjectPermission:
       type: object
       description: User-bound object level permission
@@ -55887,8 +56466,10 @@ components:
           title: ID
         user:
           type: integer
-          readOnly: true
         source:
+          type: string
+          format: uuid
+        source_obj:
           allOf:
           - $ref: '#/components/schemas/Source'
           readOnly: true
@@ -55903,11 +56484,17 @@ components:
       - identifier
       - pk
       - source
+      - source_obj
       - user
     UserPlexSourceConnectionRequest:
       type: object
       description: Plex Source connection Serializer
       properties:
+        user:
+          type: integer
+        source:
+          type: string
+          format: uuid
         identifier:
           type: string
           minLength: 1
@@ -55918,6 +56505,8 @@ components:
       required:
       - identifier
       - plex_token
+      - source
+      - user
     UserRequest:
       type: object
       description: User Serializer
@@ -55969,8 +56558,10 @@ components:
           title: ID
         user:
           type: integer
-          readOnly: true
         source:
+          type: string
+          format: uuid
+        source_obj:
           allOf:
           - $ref: '#/components/schemas/Source'
           readOnly: true
@@ -55985,16 +56576,24 @@ components:
       - identifier
       - pk
       - source
+      - source_obj
       - user
     UserSAMLSourceConnectionRequest:
       type: object
       description: SAML Source Serializer
       properties:
+        user:
+          type: integer
+        source:
+          type: string
+          format: uuid
         identifier:
           type: string
           minLength: 1
       required:
       - identifier
+      - source
+      - user
     UserSelf:
       type: object
       description: User Serializer for information a user can retrieve about themselves
@@ -56130,7 +56729,7 @@ components:
       - title
     UserSourceConnection:
       type: object
-      description: OAuth Source Serializer
+      description: User source connection
       properties:
         pk:
           type: integer
@@ -56138,8 +56737,10 @@ components:
           title: ID
         user:
           type: integer
-          readOnly: true
         source:
+          type: string
+          format: uuid
+        source_obj:
           allOf:
           - $ref: '#/components/schemas/Source'
           readOnly: true
@@ -56150,6 +56751,19 @@ components:
       required:
       - created
       - pk
+      - source
+      - source_obj
+      - user
+    UserSourceConnectionRequest:
+      type: object
+      description: User source connection
+      properties:
+        user:
+          type: integer
+        source:
+          type: string
+          format: uuid
+      required:
       - source
       - user
     UserTypeEnum:
