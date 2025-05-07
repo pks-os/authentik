@@ -1,5 +1,5 @@
 import { EVENT_REFRESH } from "@goauthentik/common/constants";
-import { getRelativeTime } from "@goauthentik/common/utils";
+import { formatElapsedTime } from "@goauthentik/common/temporal";
 import "@goauthentik/components/ak-status-label";
 import { AKElement } from "@goauthentik/elements/Base";
 import "@goauthentik/elements/EmptyState";
@@ -71,7 +71,7 @@ export class SyncStatusTable extends Table<SystemTask> {
                 good-label=${msg("Finished successfully")}
                 bad-label=${msg("Finished with errors")}
             ></ak-status-label>`,
-            html`<div>${getRelativeTime(item.finishTimestamp)}</div>
+            html`<div>${formatElapsedTime(item.finishTimestamp)}</div>
                 <small>${item.finishTimestamp.toLocaleString()}</small>`,
         ];
     }
@@ -121,7 +121,7 @@ export class SyncStatusCard extends AKElement {
 
     renderSyncStatus(): TemplateResult {
         if (this.loading) {
-            return html`<ak-empty-state ?loading=${true}></ak-empty-state>`;
+            return html`<ak-empty-state loading></ak-empty-state>`;
         }
         if (!this.syncState) {
             return html`${msg("No sync status.")}`;

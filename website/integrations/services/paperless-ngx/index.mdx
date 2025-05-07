@@ -41,8 +41,8 @@ To support the integration of Paperless-ngx with authentik, you need to create a
 
 ## Paperless Configuration
 
-import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
 
 <Tabs
   defaultValue="docker"
@@ -66,7 +66,7 @@ environment:
                 "client_id": "<Client ID>",
                 "secret": "<Client Secret>",
                 "settings": {
-                  "server_url": "https://authentik.company/application/o/paperless/.well-known/openid-configuration"
+                  "server_url": "https://authentik.company/application/o/<slug>/.well-known/openid-configuration"
                 }
               }
             ],
